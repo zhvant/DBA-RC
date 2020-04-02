@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBA Reports</title>
+    <link rel="shortcut icon" href="static/content/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="57x57" href="static/content/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="static/content/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="static/content/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="static/content/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="static/content/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="static/content/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="static/content/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="static/content/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/content/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="static/content/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="static/content/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="static/content/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="static/content/android-chrome-192x192.png" sizes="192x192">
+    <meta name="msapplication-square70x70logo" content="static/content/smalltile.png" />
+    <meta name="msapplication-square150x150logo" content="static/content/mediumtile.png" />
+    <meta name="msapplication-wide310x150logo" content="static/content/widetile.png" />
+    <meta name="msapplication-square310x310logo" content="static/content/largetile.png" />
+
+    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+    <title>Filegroups - DBA Report System</title>
+    <link rel="stylesheet" type="text/css" href="static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/content/site.css" />
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div>
+            <!--class="container"-->          
+            <div class="navbar-header"  <i class="glyphicon glyphicon-download"></i>>
+                <button type="button dropdown-toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand"> DBA Reports</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Активность<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a href="/activity?server=UTP-SQL">UTP-SQL</a></li>
+                            <li role="presentation"><a href="/activity?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
+                            <li role="presentation"><a href="/activity?server=SQL-REPORTS">SQL-REPORTS</a></li>
+                            <li role="presentation"><a href="/activity?server=SBAST-COMSQL">SBAST-COMSQL</a></li>
+                            <li role="presentation"><a href="/activity?server=GZ-LEARN">GZ-LEARN</a></li>
+                            <li role="presentation"><a href="/activity?server=FINTECH-DB">FINTECH-DB</a></li>
+                            <li role="presentation"><a href="/activity?server=SB-CRED">GAR</a></li>
+							<li role="presentation"><a href="/activity?server=GIS-NR">GIS-NR</a></li>
+							<li role="presentation"><a href="/activity?server=PLUTON$SQL2008R2">PLUTON\SQL2008R2</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Бекапы<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a href="/backups?server=UTP-SQL">UTP-SQL</a></li>
+                            <li role="presentation"><a href="/backups?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
+                            <li role="presentation"><a href="/backups?server=SQL-REPORTS">SQL-REPORTS</a></li>
+                            <li role="presentation"><a href="/backups?server=SBAST-COMSQL">SBAST-COMSQL</a></li>
+                            <li role="presentation"><a href="/backups?server=GZ-LEARN">GZ-LEARN</a></li>
+                            <li role="presentation"><a href="/backups?server=FINTECH-DB">FINTECH-DB</a></li>
+                            <li role="presentation"><a href="/backups?server=SB-CRED">GAR</a></li>
+							<li role="presentation"><a href="/backups?server=GIS-NR">GIS-NR</a></li>
+							<li role="presentation"><a href="/backups?server=PLUTON$SQL2008R2">PLUTON\SQL2008R2</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Хранилище<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a href="/storage?server=UTP-SQL">UTP-SQL</a></li>
+                            <li role="presentation"><a href="/storage?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
+                            <li role="presentation"><a href="/storage?server=SQL-REPORTS">SQL-REPORTS</a></li>
+                            <li role="presentation"><a href="/storage?server=SBAST-COMSQL">SBAST-COMSQL</a></li>
+                            <li role="presentation"><a href="/storage?server=GZ-LEARN">GZ-LEARN</a></li>
+                            <li role="presentation"><a href="/storage?server=FINTECH-DB">FINTECH-DB</a></li>
+                            <li role="presentation"><a href="/storage?server=SB-CRED">GAR</a></li>
+							<li role="presentation"><a href="/storage?server=GIS-NR">GIS-NR</a></li>
+							<li role="presentation"><a href="/storage?server=PLUTON$SQL2008R2">PLUTON\SQL2008R2</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Джобы<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a href="/Agentjob?server=UTP-SQL">UTP-SQL</a></li>
+                            <li role="presentation"><a href="/Agentjob?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
+                            <li role="presentation"><a href="/Agentjob?server=SQL-REPORTS">SQL-REPORTS</a></li>
+                            <li role="presentation"><a href="/Agentjob?server=SBAST-COMSQL">SBAST-COMSQL</a></li>
+                            <li role="presentation"><a href="/Agentjob?server=GZ-LEARN">GZ-LEARN</a></li>
+                            <li role="presentation"><a href="/Agentjob?server=FINTECH-DB">FINTECH-DB</a></li>
+                            <li role="presentation"><a href="/Agentjob?server=SB-CRED">GAR</a></li>
+							<li role="presentation"><a href="/Agentjob?server=GIS-NR">GIS-NR</a></li>
+							<li role="presentation"><a href="/Agentjob?server=PLUTON$SQL2008R2">PLUTON\SQL2008R2</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Логи<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a href="/InstanceError?server=UTP-SQL">UTP-SQL</a></li>
+                            <li role="presentation"><a href="/InstanceError?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
+                            <li role="presentation"><a href="/InstanceError?server=SQL-REPORTS">SQL-REPORTS</a></li>
+                            <li role="presentation"><a href="/InstanceError?server=SBAST-COMSQL">SBAST-COMSQL</a></li>
+                            <li role="presentation"><a href="/InstanceError?server=GZ-LEARN">GZ-LEARN</a></li>
+                            <li role="presentation"><a href="/InstanceError?server=FINTECH-DB">FINTECH-DB</a></li>
+                            <li role="presentation"><a href="/InstanceError?server=SB-CRED">GAR</a></li>
+							<li role="presentation"><a href="/InstanceError?server=GIS-NR">GIS-NR</a></li>
+							<li role="presentation"><a href="/InstanceError?server=PLUTON$SQL2008R2">PLUTON\SQL2008R2</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Мониторинг<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a target="_blank" href="http://nmc.sberbank-ast.ru/grafana/d/k4U_Klwik/dba?orgId=1&from=now-30m&to=now&theme=light&kiosk=tv&refresh=30s">Grafana</a></li>
+                            <li role="presentation"><a target="_blank" href="http://nmc.sberbank-ast.ru/zabbix/zabbix.php?action=dashboard.view">Zabbix - Главная страница</a></li>
+                            <li role="presentation"><a target="_blank" href="http://nmc.sberbank-ast.ru/zabbix/screens.php?elementid=32">Zabbix - Аукционные серверы</a></li>
+                            <li role="presentation"><a target="_blank" href="http://portal.sberbank-ast.ru/administrative/SitePages/EmploeersList.aspx">Список сотрудников</a></li>
+                            <li role="presentation"><a target="_blank" href="https://mail.sberbank-ast.ru/owa/">Outlook Web App</a></li>
+                        </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<div class="container body-content">
+
+<!-- CONTENT -->  
+
+</div>
+
+<br />
+
+<footer>
+    <p>&nbsp;&nbsp;&copy; 2020 - Created by Anton Zhivnov</p>
+</footer>
+</div>
+
+	<!--подкючаем jquery-->
+<!--<script src="fancybox/jquery.min.js"></script> -->
+ 
+    <!--подкючаем fancybox-->
+    <link rel="stylesheet" type="text/css" media="all" href="fancybox/jquery.fancybox.css">
+    <script src="fancybox/jquery.fancybox.js"></script>
+	
+	<!--подкючаем bootstrap-->
+<!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" /> -->
+	
+	<!--подкючаем code-prettify-->
+    <script src="code-prettify/loader/run_prettify.js?lang=sql"></script> <!-- &amp;skin=desert -->
+    
+    <!--подкючаем дополнительные стили-->
+    <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
+	
+	
+	<script src="static/scripts/jquery-1.10.2.js"></script>
+	<script src="static/scripts/bootstrap.js"></script>
+	<script src="static/scripts/respond.js"></script>
+</body>
+</html>

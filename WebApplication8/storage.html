@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Хранилище</title>
+	<!--подкючаем bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!--подкючаем дополнительные стили-->
+    <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
+
+</head>
+<body>
+    <h4>Доступное место в файловых группах</h4>                                                                               
+    <table class="table table-bordered table-condensed table-hover col-md-6">
+        <thead><tr><th>Файловая группа</th><th>Доступно в ГБ</th></tr></thead>
+        <tbody id="FileGroupsTable">
+           <!-- <tr><td>PRIMARY</td><td>0.9521484375</td></tr> -->
+		<!-- GetFileGroup() -->
+        </tbody>
+    </table>
+<br>
+<h4>Доступное место на файлах данных</h4>
+    <table  class="table table-bordered table-condensed table-hover col-md-6">
+        <thead><tr><th>Файловая группа</th><th>Файл</th><th>Размер в ГБ</th><th>Макс. размер в ГБ</th><th>Доступно в ГБ</th></tr></thead>
+        <tbody id="DataFilesTable">
+		<!-- GetDataFile() -->
+        </tbody>
+    </table>
+
+    				
+<script src="js/storage.js"></script>
+
+</body>
+</html>

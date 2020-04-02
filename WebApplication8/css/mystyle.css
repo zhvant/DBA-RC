@@ -1,0 +1,24 @@
+td, th {font-size: 0.8rem; }   
+thead {vertical-align: top;}
+th {background-color: #f5f5f5; color: #565656}
+
+a {
+ color: #000000; /* Цвет обычной ссылки */ 
+ text-decoration: none; /* Убираем подчеркивание у ссылок */
+font-weight: 500;
+}
+a:visited {
+ color: #000000; /* Цвет посещённой ссылки */
+} 
+a:hover {
+ color: #aaaaaa; /* Цвет ссылки при наведении на нее курсора мыши */  
+ text-decoration: underline; /* Добавляем подчеркивание */
+}
+ 
+
+
+ 
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8 {
+  list-style-type: decimal !important;
+}
