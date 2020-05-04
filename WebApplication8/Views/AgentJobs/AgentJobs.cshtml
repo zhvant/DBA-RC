@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebApplication8.Models.AgentJob>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <h4 align="center">История ошибок заданий:</h4>
+    <br />
+    <table class="table table-bordered table-condensed table-hover  col-md-6">
+        <thead><tr><th>Сервер</th><th>Задание</th><th>Дата запуска</th><th>Время запуска</th><th>Продолж.</th><th>Описание ошибки</th></tr></thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script src="static/scripts/jquery-1.10.2.js"></script>

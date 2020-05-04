@@ -1,7 +1,20 @@
+sp = window.location.href.indexOf("?server=") + 8;
+ep = window.location.href.indexOf("&");
+if (ep === -1) { ep = window.location.href.length; }
+srv = window.location.href.substr(sp, ep);
+
+sp = window.location.href.indexOf("&database=") + 10;
+//ep = window.location.href.indexOf("&");
+if (ep === -1) { ep = window.location.href.length; }
+database = window.location.href.substr(sp, ep);
+
+
+
+
 // Получение всех файловых групп
 async function GetFileGroups() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost:5001/api/filegroup?server=localhost&database=Bank", {
+    const response = await fetch("https://localhost:5001/api/filegroup?server="+srv+"&database="+database, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -39,7 +52,7 @@ GetFileGroups();
 // Получение всех файлов данных
 async function GetDataFiles() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost:5001/api/datafile?server=localhost&database=Bank", {
+    const response = await fetch("https://localhost:5001/api/datafile?server=" + srv + "&database=" + database, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });

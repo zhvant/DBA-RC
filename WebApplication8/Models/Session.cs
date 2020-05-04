@@ -23,7 +23,8 @@ namespace WebApplication8.Models
         public string SqlText { get; set; }   //  sql_text              
         public string QueryPlan { get; set; }   //  query_plan            
         public string Status { get; set; }   //  status                
-        public string PercentComplete { get; set; }   //  percent_complete      
+        public string PercentComplete { get; set; }   //  percent_complete     
+        
     }
 
 }

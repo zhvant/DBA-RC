@@ -16,6 +16,25 @@ using WebApplication8.Models;
 namespace WebApplication8.Controllers
 {
 
+
+    [Route("[controller]")]
+    public class InstanceErrorsController : Controller
+    {
+
+
+        //[HttpGet("{Server}")]
+        public IActionResult InstanceErrors(string Server)
+        {
+            var connectionStringInstanceError = $"Server={Server}; Initial Catalog=msdb;Integrated Security=True";
+            using (SqlConnection connection = new SqlConnection(connectionStringInstanceError))
+            {
+                var InstanceErrors = connection.Query<InstanceError>("sp_GetInstanceErrors");
+                return View(InstanceErrors);
+            }
+        }
+    }
+
+
     [ApiController]
     [Route("api/[controller]")]
     public class InstanceErrorController : ControllerBase

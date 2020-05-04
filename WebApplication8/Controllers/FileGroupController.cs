@@ -106,6 +106,51 @@ namespace WebApplication8.Controllers
         select FileGroupName, AvailableMB as AvailableSpace from @FilegroupsReport";
     }
 
+
+    [Route("[controller]")]
+    public class FileGroupsController : Controller
+    {
+
+        //[HttpGet("{Server}")]
+        public IActionResult FileGroups(string Server, string Database)
+        {
+
+            var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var FileGroupsAll = new List<FileGroup>();
+                var Sql = new SqlScript();
+                if (Database is null)
+                {
+                    var Databases = connection.Query<Database>($"select Name from sys.databases");
+                    foreach (var database in Databases)
+                    {
+                        var connectionStringDatabases = $"Server={Server};Initial Catalog={database.Name};Integrated Security=True";
+
+                        using (SqlConnection connection2 = new SqlConnection(connectionStringDatabases))
+                        {
+                            var fileGroups = connection2.Query<FileGroup>($"{Sql.Text}");
+                            foreach (var fg in fileGroups)
+                            {
+                                FileGroupsAll.Add(fg);
+                            }
+                        }
+                    }
+                    return View(FileGroupsAll);
+                }
+                else
+                {
+                    var FileGroups = connection.Query<FileGroup>($"{Sql.Text}");
+                    return View(FileGroups);
+                }
+
+            }
+
+        }
+    }
+
+
     [ApiController]
     [Route("api/[controller]")]
     public class FileGroupController : ControllerBase
@@ -148,22 +193,5 @@ namespace WebApplication8.Controllers
             }
             
         }
-
-
-        //[HttpGet("{Server}/{Database}")]
-        //public IEnumerable<FileGroup> Get(string Server, string Database)
-        //{
-        //
-        //    var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
-        //
-        //    var Sql = new SqlScript();
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        var FileGroups = connection.Query<FileGroup>($"{Sql.Text}");
-        //        return FileGroups;
-        //    }
-        //}
-
-
     }
 }

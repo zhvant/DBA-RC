@@ -15,10 +15,26 @@ using WebApplication8.Models;
 
 namespace WebApplication8.Controllers
 {
+    //[ApiController]
+    [Route("[controller]")]
+    public class BackupsController : Controller //ControllerBase
+    {
+        //[HttpGet("{Server}")]
+        public IActionResult Backups(string Server)
+        {
+            var connectionStringBackup = $"Server={Server};Initial Catalog=msdb;Integrated Security=True";
+            using (SqlConnection connection = new SqlConnection(connectionStringBackup))
+            {
+                var Backups = connection.Query<Backup>("sp_ShowBackups");
+                return View(Backups);
+                //return Backups;
+            }
+        }
+    }
 
     [ApiController]
     [Route("api/[controller]")]
-    public class BackupController : ControllerBase
+    public class BackupController : ControllerBase 
     {
         //[HttpGet("{Server}")]
         public IEnumerable<Backup> Get(string Server)

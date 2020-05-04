@@ -15,6 +15,24 @@ using WebApplication8.Models;
 
 namespace WebApplication8.Controllers
 {
+    //[ApiController]
+    [Route("[controller]")]
+    public class DatabasesController : Controller
+    {
+
+
+        //[HttpGet("{Server}")]
+        public IActionResult Databases(string Server)
+        {
+            var connectionString = $"Server={Server};Initial Catalog=msdb;Integrated Security=True";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var Databases = connection.Query<Database>("select Name from sys.databases");
+                ViewBag.Server = Server;
+                return View(Databases);
+            }
+        }
+    }
 
     [ApiController]
     [Route("api/[controller]")]

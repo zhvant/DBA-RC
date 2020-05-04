@@ -26,7 +26,7 @@
 		// Создание всплывающего окна в фоне
 		function CreatePopupWindow(pid, data)
 		{
-		    var style = document.createElement("style");
+            var style = document.createElement("style");
             style.innerHTML = "#sqlText-"+pid+" {display:none;}";
 			document.body.append(style);
 			//"<style>#sqlText-"+pid+" {display:none;}</style>"+
@@ -151,9 +151,9 @@
 
 			const sqlCommandColumn = document.createElement("td");
 			const sqlCommandLink = document.createElement("a");
-			sqlCommandLink.setAttribute("href","#sqlText-"+session.sessionId)
-			sqlCommandLink.setAttribute("rel","nofollow")
-			sqlCommandLink.setAttribute("class","modalbox")
+            sqlCommandLink.setAttribute("href", "#sqlText-" + session.sessionId);
+            sqlCommandLink.setAttribute("rel", "nofollow");
+            sqlCommandLink.setAttribute("class", "modalbox");
 			sqlCommandLink.append("Просмотр");
 			sqlCommandColumn.append(sqlCommandLink);
             tr.append(sqlCommandColumn);
@@ -162,9 +162,9 @@
 						
 			const sqlTextColumn = document.createElement("td");
 			const sqlTextLink = document.createElement("a");
-			sqlTextLink.setAttribute("href","#sqlText-"+session.sessionId)
-			sqlTextLink.setAttribute("rel","nofollow")
-			sqlTextLink.setAttribute("class","modalbox")
+            sqlTextLink.setAttribute("href", "#sqlText-" + session.sessionId);
+            sqlTextLink.setAttribute("rel", "nofollow");
+            sqlTextLink.setAttribute("class", "modalbox");
 			sqlTextLink.append("Просмотр");
 			sqlTextColumn.append(sqlTextLink);
             tr.append(sqlTextColumn);
