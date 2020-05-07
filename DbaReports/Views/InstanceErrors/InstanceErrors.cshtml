@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DbaReports.Models.InstanceError>
+
+@{
+    ViewData["Title"] = "InstanceErrors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
+
+<div class="container body-content">
+
+    <h4 align="center">Ошибки инстанса</h4>
+    <br />
+    <table class="table table-bordered table-condensed table-hover  col-md-6">
+        <thead><tr><th>Сервер</th><th>Дата</th><th>Процесс</th><th>Описание ошибки</th></tr></thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProcessInfo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="static/scripts/jquery-1.10.2.js"></script>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbaReportsWebApi", "WebApplication8\DbaReportsWebApi.csproj", "{1470072D-1B61-4DF6-B16B-165004FBCA4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbaReports", "DbaReports\DbaReports.csproj", "{1470072D-1B61-4DF6-B16B-165004FBCA4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
