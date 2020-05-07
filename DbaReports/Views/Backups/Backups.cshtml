@@ -22,6 +22,7 @@
                 if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-4)) trclass = "danger";
                 if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-1)) trclass = "warning";
                 if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-12)) trclass = "danger";                                   
+                
                 <tr class="@trclass">
                     <td>
                         @Html.DisplayFor(modelItem => item.DBName)

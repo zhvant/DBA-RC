@@ -25,9 +25,11 @@ namespace DbaReports.Controllers
         public IActionResult AgentJobs(string Server)
         {
             var connectionStringAgentJob = $"Server={Server}; Initial Catalog=msdb; Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionStringAgentJob))
+            try
             {
-                string SqlText = @"
+                using (SqlConnection connection = new SqlConnection(connectionStringAgentJob))
+                {
+                    string SqlText = @"
                                    SELECT 
                                	@@SERVERNAME AS ServerName
                                	,sj.NAME AS Job 
@@ -53,8 +55,14 @@ namespace DbaReports.Controllers
                                	,JH.run_status
                                	,JH.job_id
                                	,jh.message";
-                var AgentJobs = connection.Query<AgentJob>(SqlText);
-                return View(AgentJobs);
+                    var AgentJobs = connection.Query<AgentJob>(SqlText);
+                    return View(AgentJobs);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View("_Error");
             }
         }
     }

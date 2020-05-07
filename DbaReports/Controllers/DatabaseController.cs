@@ -25,11 +25,19 @@ namespace DbaReports.Controllers
         public IActionResult Databases(string Server)
         {
             var connectionString = $"Server={Server};Initial Catalog=msdb;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                var Databases = connection.Query<Database>("select Name from sys.databases");
-                ViewBag.Server = Server;
-                return View(Databases);
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    var Databases = connection.Query<Database>("select Name from sys.databases");
+                    ViewBag.Server = Server;
+                    return View(Databases);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View("_Error");
             }
         }
     }

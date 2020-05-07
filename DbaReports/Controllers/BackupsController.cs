@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.IO;
 using DbaReports.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
 //using System.Web.Http;
 
 namespace DbaReports.Controllers
@@ -23,11 +24,19 @@ namespace DbaReports.Controllers
         public IActionResult Backups(string Server)
         {
             var connectionStringBackup = $"Server={Server};Initial Catalog=msdb;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionStringBackup))
+            try
             {
-                var Backups = connection.Query<Backup>("sp_ShowBackups");
-                return View(Backups);
-                //return Backups;
+                using (SqlConnection connection = new SqlConnection(connectionStringBackup))
+                {
+                    var Backups = connection.Query<Backup>("sp_ShowBackups");
+                    return View(Backups);
+                    //return Backups;
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View("_Error");
             }
         }
     }

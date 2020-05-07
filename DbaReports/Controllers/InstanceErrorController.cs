@@ -26,10 +26,18 @@ namespace DbaReports.Controllers
         public IActionResult InstanceErrors(string Server)
         {
             var connectionStringInstanceError = $"Server={Server}; Initial Catalog=msdb;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionStringInstanceError))
+            try
             {
-                var InstanceErrors = connection.Query<InstanceError>("sp_GetInstanceErrors");
-                return View(InstanceErrors);
+                using (SqlConnection connection = new SqlConnection(connectionStringInstanceError))
+                {
+                    var InstanceErrors = connection.Query<InstanceError>("sp_GetInstanceErrors");
+                    return View(InstanceErrors);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View("_Error");
             }
         }
     }

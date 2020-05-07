@@ -21,7 +21,7 @@
                             <p><a href="/Storage?server=@ViewBag.Server&database=@Html.DisplayFor(modelItem => item.Name)">@Html.DisplayFor(modelItem => item.Name)</a></p>
                         </td>
                     </tr>
-                    if (item.Name =="msdb") { <tr><th></th></tr> }
+                    if (item.Name =="msdb") { <tr><th></th></tr> }  @* Добавить прочерк после системных баз  *@
                 }
             </tbody>
         </table>
