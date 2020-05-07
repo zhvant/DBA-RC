@@ -3,6 +3,7 @@ $(document).ready(function () {
     $(".modalbox").fancybox();
 });
 
+
 sp = window.location.href.indexOf("?server=") + 8;
 ep = window.location.href.indexOf("&");
 if (ep === -1) { ep = window.location.href.length; }
@@ -12,7 +13,7 @@ srv = window.location.href.substr(sp, ep);
 // Получение всех сессий
 async function GetSessions() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost:5001/api/session?server="+srv, {
+    const response = await fetch("https://localhost/api/session?server="+srv, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });

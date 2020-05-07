@@ -13,6 +13,7 @@
     <Content Remove="wwwroot\backups.html" />
     <Content Remove="wwwroot\databases.html" />
     <Content Remove="wwwroot\index.html" />
+    <Content Remove="wwwroot\js\sessions — копия.js" />
     <Content Remove="wwwroot\sessions.html" />
     <Content Remove="wwwroot\storage.html" />
   </ItemGroup>
