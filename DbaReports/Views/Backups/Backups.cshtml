@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Бекапы";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string trclass="";
 }
 <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
 
@@ -15,7 +16,13 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                if (item.backup_type == "Полный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-7)) trclass = "warning";
+                if (item.backup_type == "Полный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-14)) trclass = "danger";
+                if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-2)) trclass = "warning";
+                if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-4)) trclass = "danger";
+                if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-1)) trclass = "warning";
+                if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-12)) trclass = "danger";                                   
+                <tr class="@trclass">
                     <td>
                         @Html.DisplayFor(modelItem => item.DBName)
                     </td>

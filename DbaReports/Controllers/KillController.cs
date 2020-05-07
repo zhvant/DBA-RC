@@ -16,13 +16,13 @@ using DbaReports.Models;
 namespace DbaReports.Controllers
 {
 
-    [ApiController]
-    [Route("api/[controller]")]
+    //[ApiController]
+    [Route("[controller]")]
     public class KillController : ControllerBase
     {
 
         //[HttpGet("{Server}"), {Sid}]
-        public void Get(string Server, string Sid)
+        public IActionResult Get(string Server, string Sid)
         {
             var connectionString = $"Server={Server};Initial Catalog=msdb; Integrated Security=True";
 
@@ -32,7 +32,8 @@ namespace DbaReports.Controllers
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.ExecuteNonQuery();
-            }                         
+            }
+            return Redirect($"~/sessions?server={Server}");
         }
     }
 }

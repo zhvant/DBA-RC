@@ -100,7 +100,7 @@ function row(session) {
 
     const sessionIdColumn = document.createElement("td");
     const sessionIdLink = document.createElement("a");
-    sessionIdLink.setAttribute("href", "/kill?pid=" + session.sessionId);
+    sessionIdLink.setAttribute("href", "/kill?server="+srv+"&sid=" + session.sessionId);
     sessionIdLink.setAttribute("onclick", "return confirm('Kill spid " + session.sessionId + "?')");
     sessionIdLink.append(session.sessionId);
     sessionIdColumn.append(sessionIdLink);
