@@ -4,9 +4,9 @@ thead {vertical-align: top;}
 th {background-color: #f5f5f5; color: #565656}
 
 a {
- color: #000000; /* Цвет обычной ссылки */ 
- text-decoration: none; /* Убираем подчеркивание у ссылок */
-font-weight: 500;
+    color: #000000; /* Цвет обычной ссылки */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    font-weight: 500;
 }
 a:visited {
  color: #000000; /* Цвет посещённой ссылки */

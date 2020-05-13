@@ -54,19 +54,28 @@ namespace DbaReports.Controllers
                         session.Reads = reader.GetValue(10).ToString();
                         session.PhysicalReads = reader.GetValue(11).ToString();
                         session.Writes = reader.GetValue(12).ToString();
-                        session.SqlCommand = reader.GetValue(13).ToString();
-                        session.SqlText = reader.GetValue(14).ToString();
-                        session.QueryPlan = reader.GetValue(15).ToString();
+                        session.UsedMemory = reader.GetValue(13).ToString();
+                        session.SqlCommand = reader.GetValue(14).ToString();
+                        session.SqlText = reader.GetValue(15).ToString();
+                        session.QueryPlan = reader.GetValue(16).ToString();
                         //session.SqlCommand = "Test SqlCommand!";
                         //session.SqlText = "Test SqlText!";
                         //session.QueryPlan = "Test QueryPlan!";
-                        session.Status = reader.GetValue(16).ToString();
-                        session.PercentComplete = reader.GetValue(17).ToString();
+                        session.Status = reader.GetValue(17).ToString();
+                        session.PercentComplete = reader.GetValue(18).ToString();
                         Sessions.Add(session); // Добавление сессии в список
 
                         //Убрать лишние теги в начале и конце запроса
-                        //session.SqlCommand = session.SqlCommand.Substring(10, session.SqlCommand.Length - 14);
-                        //session.SqlText = session.SqlText.Substring(10, session.SqlText.Length - 14);
+                        try
+                        {
+                            session.SqlCommand = session.SqlCommand.Substring(10, session.SqlCommand.Length - 14);
+                        }
+                        catch {;};
+                        try
+                        { 
+                            session.SqlText = session.SqlText.Substring(10, session.SqlText.Length - 14);
+                        } catch {;}
+                        
                     }
                     reader.Close();
                 }

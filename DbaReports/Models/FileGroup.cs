@@ -8,7 +8,7 @@ namespace DbaReports.Models
     public class FileGroup
     {
         public string FileGroupName { get; set; }
-        public string AvailableSpace { get; set; }
+        public decimal AvailableSpace { get; set; }
 
     }
 }

@@ -9,11 +9,24 @@ ep = window.location.href.indexOf("&");
 if (ep === -1) { ep = window.location.href.length; }
 srv = window.location.href.substr(sp, ep);
 
+//<div id="spinner"><img src="~/static/content/spinner.gif" /></div>
+
+//Скрыть таблицу
+table = document.getElementById("sessions-table");
+table.style.visibility = "hidden";
+
+//Показать спиннер
+//img = document.createElement("img");
+//img.src = "static/content/spinner.gif";
+//var src = document.getElementById("spinner");
+//src.appendChild(img);
 
 // Получение всех сессий
 async function GetSessions() {
+
+
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost/api/session?server="+srv, {
+    const response = await fetch("https://localhost:5001/api/session?server="+srv, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -26,6 +39,13 @@ async function GetSessions() {
             // добавляем полученные элементы в таблицу
             rows.append(row(session));
         });
+
+        //Показать таблицу
+        table.style.visibility = "visible";
+
+        //Убрать спиннер
+        var elem = document.getElementById("spinner");
+        elem.parentNode.removeChild(elem);
     }
 }
 
@@ -75,7 +95,7 @@ function downloadFile(filename, data) {
     var url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = filename;
-    a.append("Просмотр");
+    a.append("📄");
     return a;
     //document.body.appendChild(a);
     //a.click();
@@ -156,13 +176,17 @@ function row(session) {
     writesColumn.append(session.writes);
     tr.append(writesColumn);
 
+    const usedMemoryColumn = document.createElement("td");
+    usedMemoryColumn.append(session.usedMemory);
+    tr.append(usedMemoryColumn);
 
     const sqlCommandColumn = document.createElement("td");
     const sqlCommandLink = document.createElement("a");
+    sqlCommand = session.sqlCommand;
     sqlCommandLink.setAttribute("href", "#sqlCommand-" + session.sessionId);
-    sqlCommandLink.setAttribute("rel", "nofollow");
+    sqlCommandLink.setAttribute("rel", "nofollow");    
     sqlCommandLink.setAttribute("class", "modalbox");
-    sqlCommandLink.append("Просмотр");
+    if (sqlCommand.length > 1) { sqlCommandLink.append("📄"); };
     sqlCommandColumn.append(sqlCommandLink);
     tr.append(sqlCommandColumn);
     CreatePopupWindowSqlCommand(session.sessionId, session.sqlCommand);
@@ -170,10 +194,11 @@ function row(session) {
 
     const sqlTextColumn = document.createElement("td");
     const sqlTextLink = document.createElement("a");
+    sqlText = session.sqlText;
     sqlTextLink.setAttribute("href", "#sqlText-" + session.sessionId);
     sqlTextLink.setAttribute("rel", "nofollow");
     sqlTextLink.setAttribute("class", "modalbox");
-    sqlTextLink.append("Просмотр");
+    if (sqlText.length > 1) { sqlTextLink.append("📄"); };
     sqlTextColumn.append(sqlTextLink);
     tr.append(sqlTextColumn);
     CreatePopupWindowSqlText(session.sessionId, session.sqlText);
@@ -193,9 +218,11 @@ function row(session) {
     percentCompleteColumn.append(session.percentComplete);
     tr.append(percentCompleteColumn);
 
-
     return tr;
+    
 }
 
 GetSessions();
+
+
 

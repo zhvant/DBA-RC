@@ -18,7 +18,8 @@ namespace DbaReports.Models
         public string CPU { get; set; }   //  CPU                   
         public string Reads { get; set; }   //  reads                 
         public string PhysicalReads { get; set; }   //  physical_reads        
-        public string Writes { get; set; }   //  writes                
+        public string Writes { get; set; }   //  writes     
+        public string UsedMemory { get; set; }   //  used_memory 
         public string SqlCommand { get; set; }   //  sql_command           
         public string SqlText { get; set; }   //  sql_text              
         public string QueryPlan { get; set; }   //  query_plan            

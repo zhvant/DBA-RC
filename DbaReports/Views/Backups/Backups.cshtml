@@ -2,8 +2,7 @@
 
 @{
     ViewData["Title"] = "Бекапы";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    string trclass="";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
 }
 <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
 
@@ -16,13 +15,14 @@
         <tbody>
             @foreach (var item in Model)
             {
+                string trclass = "";
                 if (item.backup_type == "Полный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-7)) trclass = "warning";
                 if (item.backup_type == "Полный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-14)) trclass = "danger";
                 if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-2)) trclass = "warning";
                 if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-4)) trclass = "danger";
                 if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-1)) trclass = "warning";
-                if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-12)) trclass = "danger";                                   
-                
+                if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-12)) trclass = "danger";
+
                 <tr class="@trclass">
                     <td>
                         @Html.DisplayFor(modelItem => item.DBName)
@@ -37,6 +37,7 @@
                         @Html.DisplayFor(modelItem => item.Physical_Device_name)
                     </td>
                 </tr>
+                
             }
         </tbody>
     </table>

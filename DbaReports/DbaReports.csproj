@@ -196,7 +196,7 @@
     <None Include="wwwroot\js\guid.js" />
     <None Include="wwwroot\js\sessions.js" />
     <None Include="wwwroot\js\storage.js" />
-    <None Include="wwwroot\static\android-chrome-192x192.png" />
+    <None Include="wwwroot\static\content\android-chrome-192x192.png" />
     <None Include="wwwroot\static\content\apple-touch-icon-114x114.png" />
     <None Include="wwwroot\static\content\apple-touch-icon-120x120.png" />
     <None Include="wwwroot\static\content\apple-touch-icon-144x144.png" />
@@ -214,9 +214,9 @@
     <None Include="wwwroot\static\content\site.css" />
     <None Include="wwwroot\static\content\smalltile.png" />
     <None Include="wwwroot\static\content\widetile.png" />
-    <None Include="wwwroot\static\favicon-16x16.png" />
-    <None Include="wwwroot\static\favicon-32x32.png" />
-    <None Include="wwwroot\static\favicon.ico" />
+    <None Include="wwwroot\static\content\favicon-16x16.png" />
+    <None Include="wwwroot\static\content\favicon-32x32.png" />
+    <None Include="wwwroot\static\content\favicon.ico" />
     <None Include="wwwroot\static\fonts\glyphicons-halflings-regular.eot" />
     <None Include="wwwroot\static\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\static\fonts\glyphicons-halflings-regular.ttf" />

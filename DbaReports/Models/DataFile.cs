@@ -8,8 +8,8 @@ namespace DbaReports.Models
     {
         public string FileGroupName { get; set; }
         public string Name { get; set; }
-        public string UsedSpace { get; set; }
-        public string MaxSpace { get; set; }
-        public string AvailableSpace { get; set; }
+        public decimal UsedSpace { get; set; }
+        public decimal MaxSpace { get; set; }
+        public decimal AvailableSpace { get; set; }
     }
 }
