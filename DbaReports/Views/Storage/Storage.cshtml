@@ -10,7 +10,7 @@
     <div>
         <table class="table table-bordered table-condensed table-hover col-md-6" id="fileGroupsTable" style="visibility:hidden">
             <thead><tr><th>Файловая группа</th><th>Доступно в ГБ</th></tr></thead>
-            <tbody>
+            <tbody id="FileGroupsBody">
                 <!-- <tr><td>PRIMARY</td><td>0.9521484375</td></tr> -->
                 <!-- GetFileGroup() -->
             </tbody>
@@ -19,9 +19,9 @@
     <br>
     <h4>Доступное место на файлах данных</h4>
     <div class="text-center"><img src="~/static/content/spinner.gif" id="dataFilesSpinner" /></div>
-    <table class="table table-bordered table-condensed table-hover col-md-6"  id="dataFilesTable" style="visibility:hidden">
+    <table class="table table-bordered table-condensed table-hover col-md-6" id="dataFilesTable" style="visibility:hidden">
         <thead><tr><th>Файловая группа</th><th>Файл</th><th>Размер в ГБ</th><th>Макс. размер в ГБ</th><th>Доступно в ГБ</th></tr></thead>
-        <tbody>
+        <tbody id="DataFilesBody">
             <!-- GetDataFile() -->
         </tbody>
     </table>

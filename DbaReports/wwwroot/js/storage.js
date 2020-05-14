@@ -16,11 +16,13 @@ fileGroupsTable.style.visibility = "hidden";
 dataFilesTable = document.getElementById("dataFilesTable");
 dataFilesTable.style.visibility = "hidden";
 
+webserver = "localhost:5001";
+
 
 // Получение всех файловых групп
 async function GetFileGroups() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost:5001/api/filegroup?server="+srv+"&database="+database, {
+    const response = await fetch("https://" + webserver +"/api/filegroup?server="+srv+"&database="+database, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -28,7 +30,7 @@ async function GetFileGroups() {
     if (response.ok === true) {
         // получаем данные
         const filegroups = await response.json();
-        let rows = document.getElementById("fileGroupsTable"); 
+        let rows = document.getElementById("FileGroupsBody"); 
         filegroups.forEach(filegroup => {
             // добавляем полученные элементы в таблицу
             rows.append(fg_row(filegroup));
@@ -65,7 +67,7 @@ GetFileGroups();
 // Получение всех файлов данных
 async function GetDataFiles() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost:5001/api/datafile?server=" + srv + "&database=" + database, {
+    const response = await fetch("https://" + webserver +"/api/datafile?server=" + srv + "&database=" + database, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -73,7 +75,7 @@ async function GetDataFiles() {
     if (response.ok === true) {
         // получаем данные
         const filegroups = await response.json();
-        let rows = document.getElementById("dataFilesTable"); 
+        let rows = document.getElementById("DataFilesBody"); 
         filegroups.forEach(datafile => {
             // добавляем полученные элементы в таблицу
             rows.append(df_row(datafile));
@@ -106,7 +108,9 @@ function df_row(datafile) {
     tr.append(usedSpaceTd);
 
     const maxSpaceTd = document.createElement("td");
-    maxSpaceTd.append(parseFloat(datafile.maxSpace / 1024).toFixed(2));
+    maxSpace = parseFloat(datafile.maxSpace / 1024).toFixed(2);
+    (maxSpace == 0.00) ? maxSpaceTd.append("Не ограничен") : maxSpaceTd.append(parseFloat(datafile.maxSpace / 1024).toFixed(2)) ;
+    
     tr.append(maxSpaceTd);
 
     const availableSpaceTd = document.createElement("td");
