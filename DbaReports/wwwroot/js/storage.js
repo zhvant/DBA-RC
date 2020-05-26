@@ -16,7 +16,7 @@ fileGroupsTable.style.visibility = "hidden";
 dataFilesTable = document.getElementById("dataFilesTable");
 dataFilesTable.style.visibility = "hidden";
 
-webserver = "localhost:5001";
+webserver = "localhost";
 
 
 // Получение всех файловых групп

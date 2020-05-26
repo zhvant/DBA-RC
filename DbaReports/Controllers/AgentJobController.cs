@@ -43,7 +43,7 @@ namespace DbaReports.Controllers
   	,JH.run_status
   	,JH.job_id
   	,jh.message
- order by 3 desc";                 
+ order by 3 desc , 4 desc";                 
     }
 
 

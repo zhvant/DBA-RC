@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnv
+@using Microsoft.AspNetCore.Hosting
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -46,7 +49,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Активность<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="/sessions?server=LOCALHOST">LOCALHOST</a></li>
+                            @if (hostingEnv.EnvironmentName == "Development")
+                            {
+                                <li role="presentation"><a href="/sessions?server=LOCALHOST">LOCALHOST</a></li>
+                            }
                             <li role="presentation"><a href="/sessions?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
                             <li role="presentation"><a href="/sessions?server=UTP-SQL">UTP-SQL</a></li>
                             <li role="presentation"><a href="/sessions?server=SQL-REPORTS">SQL-REPORTS</a></li>
@@ -61,7 +67,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Бекапы<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @*<li role="presentation"><a href="/backups?server=LOCALHOST">LOCALHOST</a></li>*@
+                            @if (hostingEnv.EnvironmentName == "Development")
+                            {
+                                <li role="presentation"><a href="/backups?server=LOCALHOST">LOCALHOST</a></li>
+                            }
                             <li role="presentation"><a href="/backups?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
                             <li role="presentation"><a href="/backups?server=UTP-SQL">UTP-SQL</a></li>
                             <li role="presentation"><a href="/backups?server=SQL-REPORTS">SQL-REPORTS</a></li>
@@ -76,7 +85,11 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Хранилище<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="/Databases?server=LOCALHOST">LOCALHOST</a></li>
+
+                            @if (hostingEnv.EnvironmentName == "Development")
+                            {
+                                <li role="presentation"><a href="/Databases?server=LOCALHOST">LOCALHOST</a></li>
+                            }
                             <li role="presentation"><a href="/Databases?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
                             <li role="presentation"><a href="/Databases?server=UTP-SQL">UTP-SQL</a></li>
                             <li role="presentation"><a href="/Databases?server=SQL-REPORTS">SQL-REPORTS</a></li>
@@ -91,7 +104,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Джобы<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @*<li role="presentation"><a href="/Agentjobs?server=LOCALHOST">LOCALHOST</a></li>*@
+                            @if (hostingEnv.EnvironmentName == "Development")
+                            {
+                                <li role="presentation"><a href="/Agentjobs?server=LOCALHOST">LOCALHOST</a></li>
+                            }
                             <li role="presentation"><a href="/Agentjobs?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
                             <li role="presentation"><a href="/Agentjobs?server=UTP-SQL">UTP-SQL</a></li>
                             <li role="presentation"><a href="/Agentjobs?server=SQL-REPORTS">SQL-REPORTS</a></li>
@@ -106,7 +122,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Логи<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @*<li role="presentation"><a href="/InstanceErrors?server=LOCALHOST">LOCALHOST</a></li>*@
+                            @if (hostingEnv.EnvironmentName == "Development")
+                            {
+                                <li role="presentation"><a href="/InstanceErrors?server=LOCALHOST">LOCALHOST</a></li>
+                            }
                             <li role="presentation"><a href="/InstanceErrors?server=DB-SERVER-MAIN">DB-SERVER-MAIN</a></li>
                             <li role="presentation"><a href="/InstanceErrors?server=UTP-SQL">UTP-SQL</a></li>
                             <li role="presentation"><a href="/InstanceErrors?server=SQL-REPORTS">SQL-REPORTS</a></li>
@@ -162,7 +181,7 @@
 
 
     @*<script src="static/scripts/jquery-1.10.2.js"></script>
-    <script src="fancybox/jquery.min.js"></script>*@
+        <script src="fancybox/jquery.min.js"></script>*@
     <script src="static/scripts/bootstrap.js"></script>
     <script src="static/scripts/respond.js"></script>
 </body>
