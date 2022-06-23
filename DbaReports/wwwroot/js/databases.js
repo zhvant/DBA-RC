@@ -2,7 +2,7 @@
 // Получение всех баз данных сервера
 async function GetDatabases() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost/api/database?server=localhost", {
+    const response = await fetch("https://" + location.host +"/api/database?server=localhost", {
         method: "GET",
         headers: { "Accept": "application/json" }
     });

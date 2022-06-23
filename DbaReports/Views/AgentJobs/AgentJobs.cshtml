@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DbaReports.Models.AgentJob>
+﻿@model IEnumerable<DbaRC.Models.AgentJob>
 
 @{
     ViewData["Title"] = "View";
@@ -7,10 +7,10 @@
 
 
 <div class="container body-content">
-    <h4 align="center">История ошибок заданий:</h4>
+    <h4 align="center">Scheduled Actions:</h4>
     <br />
     <table class="table table-bordered table-condensed table-hover  col-md-6">
-        <thead><tr><th>Сервер</th><th>Задание</th><th>Дата запуска</th><th>Время запуска</th><th>Продолж.</th><th>Описание ошибки</th></tr></thead>
+        <thead><tr><th>Server</th><th>Job Name</th><th>Start Date</th><th>StartTime</th><th>Duration</th><th>Message</th></tr></thead>
         <tbody>
             @foreach (var item in Model)
             {

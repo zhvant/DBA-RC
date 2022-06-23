@@ -5,11 +5,11 @@
 }
 <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
 <div class="container body-content">
-    <h4>Доступное место в файловых группах</h4>
+    <h4>Free Space in File Groups</h4>
     <div class="text-center"><img src="~/static/content/spinner.gif" id="fileGroupsSpinner" /></div>
     <div>
         <table class="table table-bordered table-condensed table-hover col-md-6" id="fileGroupsTable" style="visibility:hidden">
-            <thead><tr><th>Файловая группа</th><th>Доступно в ГБ</th></tr></thead>
+            <thead><tr><th>File group</th><th>Free space</th></tr></thead>
             <tbody id="FileGroupsBody">
                 <!-- <tr><td>PRIMARY</td><td>0.9521484375</td></tr> -->
                 <!-- GetFileGroup() -->
@@ -17,10 +17,10 @@
         </table>
     </div>
     <br>
-    <h4>Доступное место на файлах данных</h4>
+    <h4>Free Space in Data Files</h4>
     <div class="text-center"><img src="~/static/content/spinner.gif" id="dataFilesSpinner" /></div>
     <table class="table table-bordered table-condensed table-hover col-md-6" id="dataFilesTable" style="visibility:hidden">
-        <thead><tr><th>Файловая группа</th><th>Файл</th><th>Размер в ГБ</th><th>Макс. размер в ГБ</th><th>Доступно в ГБ</th></tr></thead>
+        <thead><tr><th>File group</th><th>File</th><th>Used space</th><th>Max size</th><th>Free space</th></tr></thead>
         <tbody id="DataFilesBody">
             <!-- GetDataFile() -->
         </tbody>
@@ -28,6 +28,4 @@
 </div>
 
     <script src="js/storage.js"></script>
-    <script src="static/scripts/jquery-1.10.2.js"></script>
-
 

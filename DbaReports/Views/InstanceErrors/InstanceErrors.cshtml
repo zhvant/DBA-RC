@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DbaReports.Models.InstanceError>
+﻿@model IEnumerable<DbaRC.Models.InstanceError>
 
 @{
     ViewData["Title"] = "InstanceErrors";
@@ -9,10 +9,10 @@
 
 <div class="container body-content">
 
-    <h4 align="center">Ошибки инстанса</h4>
+    <h4 align="center">Instance Log</h4>
     <br />
     <table class="table table-bordered table-condensed table-hover  col-md-6">
-        <thead><tr><th>Сервер</th><th>Дата</th><th>Процесс</th><th>Описание ошибки</th></tr></thead>
+        <thead><tr><th>Server</th><th>Date</th><th>Process</th><th>Description</th></tr></thead>
         <tbody>
             @foreach (var item in Model)
             {

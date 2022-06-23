@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".modalbox").fancybox();
 });
 
-
+webserver = location.host;
 sp = window.location.href.indexOf("?server=") + 8;
 ep = window.location.href.indexOf("&");
 if (ep === -1) { ep = window.location.href.length; }
@@ -26,7 +26,7 @@ async function GetSessions() {
 
 
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost/api/session?server="+srv, {
+    const response = await fetch("https://" + webserver +"/api/session?server=" + srv, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -205,7 +205,7 @@ function row(session) {
 
 
     const queryPlanColumn = document.createElement("td");
-    if (session.queryPlan !== "") { queryPlanColumn.append(downloadFile(session.sessionId + "_queryPlan(" + guid() + ").sqlplan", session.queryPlan)); }
+   // if (session.queryPlan !== "") { queryPlanColumn.append(downloadFile(session.sessionId + "_queryPlan(" + guid() + ").sqlplan", session.queryPlan)); }
     tr.append(queryPlanColumn);
 
 

@@ -16,7 +16,7 @@ fileGroupsTable.style.visibility = "hidden";
 dataFilesTable = document.getElementById("dataFilesTable");
 dataFilesTable.style.visibility = "hidden";
 
-webserver = "localhost";
+webserver = location.host;
 
 
 // Получение всех файловых групп
@@ -109,7 +109,7 @@ function df_row(datafile) {
 
     const maxSpaceTd = document.createElement("td");
     maxSpace = parseFloat(datafile.maxSpace / 1024).toFixed(2);
-    (maxSpace == 0.00) ? maxSpaceTd.append("Не ограничен") : maxSpaceTd.append(parseFloat(datafile.maxSpace / 1024).toFixed(2)) ;
+    (maxSpace == 0.00) ? maxSpaceTd.append("Not limited") : maxSpaceTd.append(parseFloat(datafile.maxSpace / 1024).toFixed(2)) ;
     
     tr.append(maxSpaceTd);
 

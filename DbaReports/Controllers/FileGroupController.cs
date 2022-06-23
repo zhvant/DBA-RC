@@ -10,10 +10,10 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.IO;
-using DbaReports.Models;
+using DbaRC.Models;
 
 
-namespace DbaReports.Controllers
+namespace DbaRC.Controllers
 {
     class SqlScript
     {
@@ -56,7 +56,7 @@ namespace DbaReports.Controllers
         insert into @drives
         execute xp_fixeddrives
         
-        ---------------------------- Отчет по группам------------------------------------------ -
+        ---------------------------- Report by filegroups ------------------------------------------ -
         
         insert into @filegroups
         SELECT
@@ -110,12 +110,16 @@ namespace DbaReports.Controllers
     [Route("[controller]")]
     public class FileGroupsController : Controller
     {
-
+        private readonly SettingsContext db;
+        public FileGroupsController(SettingsContext context) => db = context;
         //[HttpGet("{Server}")]
         public IActionResult FileGroups(string Server, string Database)
         {
-
-            var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            builder.InitialCatalog = Database;
+            connectionString = builder.ConnectionString;
+            //var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -126,7 +130,11 @@ namespace DbaReports.Controllers
                     var Databases = connection.Query<Database>($"select Name from sys.databases");
                     foreach (var database in Databases)
                     {
-                        var connectionStringDatabases = $"Server={Server};Initial Catalog={database.Name};Integrated Security=True";
+                        var connectionStringDatabases = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+                        var builderDatabases = new SqlConnectionStringBuilder(connectionString);
+                        builderDatabases.InitialCatalog = database.Name;
+                        connectionString = builderDatabases.ConnectionString;
+                        //var connectionStringDatabases = $"Server={Server};Initial Catalog={database.Name};Integrated Security=True";
 
                         using (SqlConnection connection2 = new SqlConnection(connectionStringDatabases))
                         {
@@ -155,12 +163,16 @@ namespace DbaReports.Controllers
     [Route("api/[controller]")]
     public class FileGroupController : ControllerBase
     {
-
+        private readonly SettingsContext db;
+        public FileGroupController(SettingsContext context) => db = context;
         //[HttpGet("{Server}")]
         public IEnumerable<FileGroup> Get(string Server, string Database)
         {
-           
-            var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            builder.InitialCatalog = Database;
+            connectionString = builder.ConnectionString;
+            //var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -171,7 +183,11 @@ namespace DbaReports.Controllers
                     var Databases = connection.Query<Database>($"select Name from sys.databases");
                     foreach (var database in Databases)
                     {
-                        var connectionStringDatabases = $"Server={Server};Initial Catalog={database.Name};Integrated Security=True";
+                        var connectionStringDatabases = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+                        var builderDatabases = new SqlConnectionStringBuilder(connectionString);
+                        builderDatabases.InitialCatalog = database.Name;
+                        connectionString = builderDatabases.ConnectionString;
+                        //var connectionStringDatabases = $"Server={Server};Initial Catalog={database.Name};Integrated Security=True";
 
                         using (SqlConnection connection2 = new SqlConnection(connectionStringDatabases))
                         {

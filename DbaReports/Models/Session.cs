@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DbaReports.Models
+namespace DbaRC.Models
 {
     public class Session
     {

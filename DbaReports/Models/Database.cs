@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace DbaReports.Models
+namespace DbaRC.Models
 {
     public class Database
     {

@@ -1,0 +1,52 @@
+﻿@model DbaRC.Models.Setting
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
+
+<div class="container body-content">
+<h4>Create</h4>
+
+<h5>Server or Monitoring Link</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ServerName" class="control-label"></label>
+                <input asp-for="ServerName" class="form-control" />
+                <span asp-validation-for="ServerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select class="form-control" id="Type" name="Type">
+                   <option value="ConnectionString">Connection String</option>
+                   <option value="WebLink">Web Link</option>
+                   <option value="Dashboard">Dashboard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConnectionString" class="control-label"></label>
+                <input asp-for="ConnectionString" class="form-control" />
+                <span asp-validation-for="ConnectionString" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    <script src="~/static/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/static/scripts/bootstrap.min.js"></script>
+    <script src="~/static/scripts/respond.min.js"></script>
+}

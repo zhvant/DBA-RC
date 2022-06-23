@@ -1,27 +1,27 @@
-﻿@model IEnumerable<DbaReports.Models.Backup>
+﻿@model IEnumerable<DbaRC.Models.Backup>
 
 @{
-    ViewData["Title"] = "Бекапы";
+    ViewData["Title"] = "Backups";
     Layout = "~/Views/Shared/_Layout.cshtml";    
 }
 <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
 
 <div class="container body-content">
 
-    <h4 align="center">Список бекапов</h4>
+    <h4 align="center">Backup List</h4>
     <br />
     <table class="table table-bordered table-condensed table-hover  col-md-6">
-        <thead><tr><th>База данных</th><th>Дата последнего бекапа</th><th>Тип бекапа</th><th>Адрес бекапа</th></tr></thead>
+        <thead><tr><th>Database</th><th>Date</th><th>Type</th><th>Path</th></tr></thead>
         <tbody>
             @foreach (var item in Model)
             {
                 string trclass = "";
-                if (item.backup_type == "Полный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-7)) trclass = "warning";
-                if (item.backup_type == "Полный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-14)) trclass = "danger";
-                if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-2)) trclass = "warning";
-                if (item.backup_type == "Дифференциальный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-4)) trclass = "danger";
-                if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-1)) trclass = "warning";
-                if (item.backup_type == "Транзакционный" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-12)) trclass = "danger";
+                if (item.backup_type == "FULL" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-7)) trclass = "warning";
+                if (item.backup_type == "FULL" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-14)) trclass = "danger";
+                if (item.backup_type == "DIFF" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-2)) trclass = "warning";
+                if (item.backup_type == "DIFF" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddDays(-4)) trclass = "danger";
+                if (item.backup_type == "TRAN" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-1)) trclass = "warning";
+                if (item.backup_type == "TRAN" & Convert.ToDateTime(item.DateOfLastBackup) < DateTime.Today.AddHours(-12)) trclass = "danger";
 
                 <tr class="@trclass">
                     <td>
@@ -44,4 +44,9 @@
 
 </div>
 
-<script src="static/scripts/jquery-1.10.2.js"></script>
+@*@section Scripts {
+    <script src="~/static/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/static/scripts/respond.min.js"></script>
+    <script src="~/static/scripts/bootstrap.min.js"></script>
+   
+}*@

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
-namespace DbaReports
+namespace DbaRC
 {
     public class Startup
     {
@@ -28,6 +29,9 @@ namespace DbaReports
             //services.AddControllers();
             services.AddControllersWithViews();
 
+            services.AddDbContext<SettingsContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SettingsContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +41,14 @@ namespace DbaReports
             {
                 app.UseDeveloperExceptionPage();
             }
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var services = scope.ServiceProvider;
 
+                var context = services.GetRequiredService<SettingsContext>();
+                context.Database.EnsureCreated();
+                // DbInitializer.Initialize(context);
+            }
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -51,7 +62,6 @@ namespace DbaReports
                         name: "default",
                         pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            //app.UseDefaultFiles();
             app.UseStaticFiles();
         }
     }

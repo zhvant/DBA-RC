@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DbaReports.Models.Session>
+﻿@model IEnumerable<DbaRC.Models.Session>
 
 @{
     ViewData["Title"] = "Sessions";
@@ -20,12 +20,12 @@
 <link rel="stylesheet" type="text/css" media="all" href="css/mystyle.css">
 
 
-<h4>Активные сессии</h4>
+<h4>Active Sessions</h4>
 @*<div class="text-center"><p>Время:<input type="time" name="selected_time" list="time-list"><input type="submit" value="🔍"></p></div>*@
 <br />
 <div class="text-center" ><img src="~/static/content/spinner.gif" id="spinner"/></div>
 <table class="table table-bordered table-condensed table-hover" id="sessions-table" style="visibility:hidden">
-    <thead> <tr><th>дд чч:мм:сс.мсс</th><th>БД</th><th>ИД Сессии</th><th>Имя сервера</th><th>Логин</th><th>ИД блокирующей сессии</th><th>Кол-во заблокированных сессий</th><th>Информация о блокировке</th><th>Программа</th><th>CPU</th><th>Логических чтений</th><th>Физических чтений</th><th>Записей</th><th>Использовано памяти</th><th>SQL пакет</th>	<th>SQL запрос	</th><th>План запроса</th><th>Статус</th><th>Процент выполнения</th></tr> </thead>
+    <thead> <tr><th>Duration</th><th>DB</th><th>SPID</th><th>Server Name</th><th>Login</th><th>Block source id</th><th>Blocked count</th><th>Block info</th><th>Service</th><th>CPU</th><th>Logical reads</th><th>Physical reads</th><th>Writes</th><th>RAM Used</th><th>SQL batch</th>	<th>SQL query	</th><th>Query Plan</th><th>Status</th><th>Percent</th></tr> </thead>
     <tbody>
         <!-- GetSessions() -->
     </tbody>

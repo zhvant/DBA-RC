@@ -10,23 +10,27 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.IO;
-using DbaReports.Models;
+using DbaRC.Models;
 
 
-namespace DbaReports.Controllers
+namespace DbaRC.Controllers
 {
 
     //[ApiController]
     [Route("[controller]")]
     public class DataFilesController : Controller
     {
-
+        private readonly SettingsContext db;
+        public DataFilesController(SettingsContext context) => db = context;
 
         //[HttpGet("{Server}/{Database}")]
         public IActionResult DataFiles(string Server, string Database)
         {
-
-            var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            builder.InitialCatalog = Database;
+            connectionString = builder.ConnectionString;
+            //var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
 
             var Sql = @"
         SET NOCOUNT ON  
@@ -139,15 +143,19 @@ namespace DbaReports.Controllers
     [Route("api/[controller]")]
     public class DataFileController : ControllerBase
     {
-
+        private readonly SettingsContext db;
+        public DataFileController(SettingsContext context) => db = context;
 
         //[HttpGet("{Server}/{Database}")]
         public IEnumerable<DataFile> Get(string Server, string Database)
         {
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            builder.InitialCatalog = Database;
+            connectionString = builder.ConnectionString;
+       //var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
 
-        var connectionString = $"Server={Server};Initial Catalog={Database};Integrated Security=True";
-        
-        var Sql = @"
+       var Sql = @"
         SET NOCOUNT ON  
         
         declare @drives table
@@ -182,11 +190,11 @@ namespace DbaReports.Controllers
         , AvailableMB bigint
         , AvailableGB int)
         
-        --Свободное место на дисках
+        --Free space on disks
         insert into @drives
         execute xp_fixeddrives
         
-        ---------------------------- Отчет по группам------------------------------------------ -
+        ---------------------------- Report by file groups ------------------------------------------ -
         
         insert into @filegroups
         SELECT
@@ -222,7 +230,7 @@ namespace DbaReports.Controllers
         FROM @filegroups f join @drives d on f.drive = d.drive
         
         
-        --Отчет по группам
+        -- Report by file groups
         insert into @FilegroupsReport
         SELECT
         DB

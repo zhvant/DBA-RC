@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DbaReports.Models.Database>
+﻿@model IEnumerable<DbaRC.Models.Database>
 
 @{
     ViewData["Title"] = "Storage";
@@ -9,7 +9,7 @@
 
 <div class="container body-content">
     <div class="container body-content col-md-6">
-        <h4 align="center">База данных</h4>
+        <h4 align="center">Database</h4>
         <br />
         <table class="table table-bordered table-condensed table-hover col-md-3">
             <thead><tr><th></th><th></th></tr></thead>
@@ -22,11 +22,11 @@
                         </td>
                         <td>
                             @if (item.Size<1024)
-                            {@(item.Size)  <size>Мб</size>}
+                            {@(item.Size)  <size>Mb</size>}
                             else if (item.Size>=1024 & item.Size<1048576)
-                            {@(item.Size=Math.Round(item.Size/1024,2))  <size>Гб</size>}
+                            {@(item.Size=Math.Round(item.Size/1024,2))  <size>GB</size>}
                             else if (item.Size>=1048576)
-                            {@(item.Size=Math.Round(item.Size/1024/1024,2))  <size>Тб</size>}
+                            {@(item.Size=Math.Round(item.Size/1024/1024,2))  <size>TB</size>}
                         </td>
 
                     </tr>

@@ -10,21 +10,23 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.IO;
-using DbaReports.Models;
+using DbaRC.Models;
 
 
-namespace DbaReports.Controllers
+namespace DbaRC.Controllers
 {
 
     //[ApiController]
     [Route("[controller]")]
     public class KillController : ControllerBase
     {
-
         //[HttpGet("{Server}"), {Sid}]
+
+        private readonly SettingsContext db;
+        public KillController(SettingsContext context) => db = context;       
         public IActionResult Get(string Server, string Sid)
         {
-            var connectionString = $"Server={Server};Initial Catalog=msdb; Integrated Security=True";
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

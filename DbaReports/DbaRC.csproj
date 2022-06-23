@@ -1,30 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
-    <AssemblyName>DbaReports</AssemblyName>
-    <RootNamespace>DbaReports</RootNamespace>
+    <AssemblyName>DbaRC</AssemblyName>
+    <RootNamespace>DbaRC</RootNamespace>
+    <UserSecretsId>b822f03c-00c2-41d5-9284-fcfaf8fbe0d6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyVersion>2.3</AssemblyVersion>
+    <FileVersion>2.3</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\backups.html" />
-    <Content Remove="wwwroot\databases.html" />
-    <Content Remove="wwwroot\index.html" />
-    <Content Remove="wwwroot\js\sessions — копия.js" />
-    <Content Remove="wwwroot\sessions.html" />
-    <Content Remove="wwwroot\storage.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.30" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.47021.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Shared\Components\ShowServers\Default.cshtml" />
     <None Include="wwwroot\code-prettify\.gitignore" />
     <None Include="wwwroot\code-prettify\CHANGES.md" />
     <None Include="wwwroot\code-prettify\COPYING" />
@@ -331,6 +334,15 @@
     <None Include="wwwroot\static\scripts\styles\zenburn.css" />
     <None Include="wwwroot\static\scripts\_references.js" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 
 </Project>

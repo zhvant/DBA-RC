@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Setting>
+
+<div class="navbar-collapse collapse">
+   <ul class="nav navbar-nav">
+     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Activity<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+              @foreach (var item in Model.Where(u => u.Type.Contains("ConnectionString")))
+              {
+                  @Html.Raw("<li role='presentation'><a href='/sessions?server=") @item.ServerName @Html.Raw("'>") @item.ServerName @Html.Raw("</a></li>")
+              }
+         </ul>
+     </li>
+     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Backups<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+              @foreach (var item in Model.Where(u => u.Type.Contains("ConnectionString")))
+              {
+                  @Html.Raw("<li role='presentation'><a href='/backups?server=") @item.ServerName @Html.Raw("'>") @item.ServerName @Html.Raw("</a></li>")
+              }
+         </ul>
+     </li>
+          <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Storage<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+              @foreach (var item in Model.Where(u => u.Type.Contains("ConnectionString")))
+              {
+                  @Html.Raw("<li role='presentation'><a href='/Databases?server=") @item.ServerName @Html.Raw("'>") @item.ServerName @Html.Raw("</a></li>")
+              }
+         </ul>
+     </li>
+          <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Jobs<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+              @foreach (var item in Model.Where(u => u.Type.Contains("ConnectionString")))
+              {
+                  @Html.Raw("<li role='presentation'><a href='/Agentjobs?server=") @item.ServerName @Html.Raw("'>") @item.ServerName @Html.Raw("</a></li>")
+              }
+         </ul>
+     </li>
+          <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Logs<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+              @foreach (var item in Model.Where(u => u.Type.Contains("ConnectionString")))
+              {
+                  @Html.Raw("<li role='presentation'><a href='/InstanceErrors?server=") @item.ServerName @Html.Raw("'>") @item.ServerName @Html.Raw("</a></li>")
+              }
+         </ul>
+     </li>
+     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Monitoring<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          
+              @foreach (var item in Model.Where(u => u.Type.Contains("WebLink")))
+              {
+                  @Html.Raw("<li role='presentation'><a target='_blank' href='") @item.ConnectionString @Html.Raw("'>") @item.ServerName @Html.Raw("</a></li>")
+              }
+         </ul>
+     </li>
+     <li><a href="/Settings">Settings</a></li>
+   </ul>
+

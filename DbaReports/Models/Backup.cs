@@ -7,7 +7,7 @@ using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DbaReports.Models
+namespace DbaRC.Models
 {
     public class Backup
     {

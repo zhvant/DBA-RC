@@ -13,9 +13,15 @@ namespace DbaReportsWebApi.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SettingsContext db;
+
+        public HomeController(SettingsContext context) => db = context;
+
         public IActionResult Index()
         {
-            return View();
+            var items = db.Setting
+           .ToList();
+            return View(items);
         }
     }
 }

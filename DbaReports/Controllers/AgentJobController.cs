@@ -10,40 +10,40 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.IO;
-using DbaReports.Models;
+using DbaRC.Models;
 
 
-namespace DbaReports.Controllers
+namespace DbaRC.Controllers
 {
     public static class AgentJobSql
     {
         public static string SqlText = @"
- SELECT 
+  SELECT 
   	@@SERVERNAME AS ServerName
   	,sj.NAME AS JobName 
   	,convert(varchar(10),cast(cast(JH.run_date as nvarchar(8)) as date),104)  AS StartDate
   	,STUFF(STUFF(RIGHT('000000' + CAST(MAX(JH.run_time) AS VARCHAR(6)), 6), 5, 0, ':'), 3, 0, ':') AS StartTime
   	,STUFF(STUFF(RIGHT('000000' + CAST(MAX(JH.run_duration) AS VARCHAR(6)), 6), 5, 0, ':'), 3, 0, ':') AS Duration
     ,jh.Message 
-  FROM dbo.sysjobhistory AS JH
-  FULL OUTER JOIN dbo.sysjobs AS sj ON JH.job_id = sj.job_id
+  FROM msdb.dbo.sysjobhistory AS JH
+  FULL OUTER JOIN msdb.dbo.sysjobs AS sj ON JH.job_id = sj.job_id
   WHERE (JH.run_time IS NOT NULL)
   and
   run_status=0 --Ошибка
   and 
-  sj.NAME not in ('system - mail test','UTP_SignAgreementRole','job_ParseNotificationEF','DBA_session_monitor.data_collection','DBA_session_monitor.clear_table') --Исключить спам джобы
+  sj.NAME not in ('system - mail test','UTP_SignAgreementRole','job_ParseNotificationEF','DBA_session_monitor.data_collection','DBA_session_monitor.clear_table') 
   and
-  JH.run_date>(SELECT CONVERT(VARCHAR(10), getdate()-7 --Разница в днях от текущей даты: 1=сегодня, 2=вчера итд.     
-  , 112)) -- Формат даты
+  JH.run_date>(SELECT CONVERT(VARCHAR(10), getdate()-7 --Difference in days from current date: 1=today, 2=yesterday, etc.    
+  , 112)) -- date format
   and
-  step_id>0 --Только шаги джоба
+  step_id>0 --job steps only
   GROUP BY sj.NAME
   	,JH.run_date
   	,JH.run_time
   	,JH.run_status
   	,JH.job_id
   	,jh.message
- order by 3 desc , 4 desc";                 
+ order by JH.run_date desc , 4 desc";                 
     }
 
 
@@ -52,12 +52,14 @@ namespace DbaReports.Controllers
     [Route("[controller]")]
     public class AgentJobsController  : Controller
     {
+        private readonly SettingsContext db;
+        public AgentJobsController(SettingsContext context) => db = context;
         public IActionResult AgentJobs(string Server)
         {
-            var connectionStringAgentJob = $"Server={Server}; Initial Catalog=msdb; Integrated Security=True";
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionStringAgentJob))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {                  
                     var AgentJobs = connection.Query<AgentJob>(AgentJobSql.SqlText);
                     return View(AgentJobs);
@@ -75,10 +77,12 @@ namespace DbaReports.Controllers
     [Route("api/[controller]")]
     public class AgentJobController : ControllerBase
     {
+        private readonly SettingsContext db;
+        public AgentJobController(SettingsContext context) => db = context;
         public IEnumerable<AgentJob> Get(string Server)
         {
-            var connectionStringAgentJob = $"Server={Server}; Initial Catalog=msdb; Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionStringAgentJob))
+            var connectionString = db.Setting.FirstOrDefault(m => m.ServerName == Server).ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {              
                 var AgentJobs = connection.Query<AgentJob>(AgentJobSql.SqlText);
                 return AgentJobs;

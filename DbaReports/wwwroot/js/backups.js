@@ -2,7 +2,7 @@
 
 async function GetBackups() {
     // отправляет запрос и получаем ответ
-    const response = await fetch("https://localhost/api/backup?server=localhost", {
+    const response = await fetch("https://" + location.host +"/api/backup?server=localhost", {
         method: "GET",
         headers: { "Accept": "application/json" }
     });

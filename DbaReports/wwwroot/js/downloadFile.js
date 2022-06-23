@@ -11,7 +11,7 @@ function downloadFile(filename, data)
     var url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = filename;
-	a.append("Просмотр");
+	a.append("View");
 	return a
     //document.body.appendChild(a);
     //a.click();

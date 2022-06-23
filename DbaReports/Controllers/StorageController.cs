@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.IO;
-using DbaReports.Models;
+using DbaRC.Models;
 
 namespace DbaReportsWebApi.Controllers
 {
