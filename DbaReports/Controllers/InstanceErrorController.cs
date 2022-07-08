@@ -35,19 +35,19 @@ namespace DbaRC.Controllers
                 @t 
               where 
                 1 = 1 
-                and text not like '%SSPI%' 
-                and text not like '%0 errors%' 
-                and text not in (
+                and Text not like '%SSPI%' 
+                and Text not like '%0 errors%' 
+                and Text not in (
                   'Error: 18452, Severity: 14, State: 1.', 
                   'Error: 17806, Severity: 20, State: 14.', 
                   'FILESTREAM: effective level = 0, configured level = 0, file system access share name = ''MSSQLSERVER''.', 
                   'Configuration option ''user options'' changed from 0 to 0. Run the RECONFIGURE statement to install.'
                 ) 
-                and text not like 'Log was backed up.%' 
-                and text not like 'Database backed up.%' 
-                and text not like 'Database differential changes were backed up.%' 
-                and text not like 'This instance of SQL Server has been using a process ID%' 
-                and text not like '%This is an informational message only%' 
+                and Text not like 'Log was backed up.%' 
+                and Text not like 'Database backed up.%' 
+                and Text not like 'Database differential changes were backed up.%' 
+                and Text not like 'This instance of SQL Server has been using a process ID%' 
+                and Text not like '%This is an informational message only%' 
                 and LogDate > getdate()-5 
               order by 
                 LogDate desc 

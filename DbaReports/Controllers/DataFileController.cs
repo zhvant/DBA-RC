@@ -40,7 +40,9 @@ namespace DbaRC.Controllers
         , MBFree bigint
         )
         
-        
+        declare @platform varchar(10) = 'Windows'
+        if  @@VERSION like '%Linux%' set @platform = 'Linux' 
+
         declare @filegroups table
         (filegroupname nvarchar(255)
         , size bigint
@@ -70,8 +72,9 @@ namespace DbaRC.Controllers
         --Свободное место на дисках
         insert into @drives
         execute xp_fixeddrives
-        
-        ---------------------------- Отчет по группам------------------------------------------ -
+        if @platform='Linux' update @drives set drive = '/'
+
+        ---------------------------- Report by file groups------------------------------------------ -
         
         insert into @filegroups
         SELECT
@@ -94,8 +97,8 @@ namespace DbaRC.Controllers
         
         
         insert into @FilesReport
-        SELECT DB_NAME() as DB,FileGroupName,  
-        f.Drive,  
+        SELECT DB_NAME() as DB,filegroupname,  
+        f.drive,  
         physical_name as FileName,  
         size * 8 / 1024 as SizeMB,   
         max_size * 8 / 1024 as MaxSizeMB,  
@@ -106,8 +109,7 @@ namespace DbaRC.Controllers
         end as AvailableMB
         FROM @filegroups f join @drives d on f.drive = d.drive
         
-        
-        --Отчет по группам
+       
         insert into @FilegroupsReport
         SELECT
         DB
@@ -163,7 +165,9 @@ namespace DbaRC.Controllers
         , MBFree bigint
         )
         
-        
+        declare @platform varchar(10) = 'Windows'
+        if  @@VERSION like '%Linux%' set @platform = 'Linux' 
+
         declare @filegroups table
         (filegroupname nvarchar(255)
         , size bigint
@@ -193,7 +197,8 @@ namespace DbaRC.Controllers
         --Free space on disks
         insert into @drives
         execute xp_fixeddrives
-        
+        if @platform='Linux' update @drives set drive = '/'
+
         ---------------------------- Report by file groups ------------------------------------------ -
         
         insert into @filegroups
@@ -217,8 +222,8 @@ namespace DbaRC.Controllers
         
         
         insert into @FilesReport
-        SELECT DB_NAME() as DB,FileGroupName,  
-        f.Drive,  
+        SELECT DB_NAME() as DB,filegroupname,  
+        f.drive,  
         physical_name as FileName,  
         size * 8 / 1024 as SizeMB,   
         max_size * 8 / 1024 as MaxSizeMB,  
@@ -230,7 +235,6 @@ namespace DbaRC.Controllers
         FROM @filegroups f join @drives d on f.drive = d.drive
         
         
-        -- Report by file groups
         insert into @FilegroupsReport
         SELECT
         DB

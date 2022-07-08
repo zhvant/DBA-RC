@@ -74,15 +74,15 @@ namespace DbaRC.Controllers
                   allbakdate.DBName, 
                   DateOfLastBackup, 
                   allbak.backup_type, 
-                  Physical_Device_name 
+                  physical_device_name 
                 from 
                   (
                     SELECT 
                       @@Servername AS ServerName, 
                       d.Name AS DBName, 
-                      b.Backup_finish_date, 
+                      b.backup_finish_date, 
                       CASE b.[type] WHEN 'D' THEN 'FULL' WHEN 'I' THEN 'DIFF' WHEN 'L' THEN 'TRAN' END as backup_type, 
-                      bmf.Physical_Device_name 
+                      bmf.physical_device_name 
                     FROM 
                       sys.databases d 
                       LEFT JOIN msdb..backupset b ON b.database_name = d.name 
@@ -93,15 +93,15 @@ namespace DbaRC.Controllers
                     select 
                       DBName, 
                       [backup_type], 
-                      max(Backup_finish_date) as 'DateOfLastBackup' 
+                      max(backup_finish_date) as 'DateOfLastBackup' 
                     from 
                       (
                         SELECT 
                           @@Servername AS ServerName, 
                           d.Name AS DBName, 
-                          b.Backup_finish_date, 
+                          b.backup_finish_date, 
                           CASE b.[type] WHEN 'D' THEN 'FULL' WHEN 'I' THEN 'DIFF' WHEN 'L' THEN 'TRAN' END as backup_type, 
-                          bmf.Physical_Device_name 
+                          bmf.physical_device_name 
                         FROM 
                           sys.databases d 
                           LEFT JOIN msdb..backupset b ON b.database_name = d.name 
@@ -111,7 +111,7 @@ namespace DbaRC.Controllers
                     group by 
                       DBName, 
                       [backup_type]
-                  ) allbakdate on allbakdate.DateOfLastBackup = allbak.Backup_finish_date 
+                  ) allbakdate on allbakdate.DateOfLastBackup = allbak.backup_finish_date 
                 where 
                   datediff(
                     day, 

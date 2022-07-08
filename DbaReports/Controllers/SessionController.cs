@@ -108,11 +108,11 @@ namespace DbaRC.Controllers
 USE master
 GO
 
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = 'sp_ShowSession')
-	EXEC ('CREATE PROC dbo.sp_ShowSession AS SELECT ''stub version, to be replaced''')
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = 'sp_showsession')
+	EXEC ('CREATE PROC dbo.sp_showsession AS SELECT ''stub version, to be replaced''')
 GO
 
-ALTER PROC dbo.sp_ShowSession
+ALTER PROC dbo.sp_showsession
 (
 	@filter sysname = '',
 	@filter_type VARCHAR(10) = 'session',

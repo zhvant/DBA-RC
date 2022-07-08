@@ -25,6 +25,8 @@ namespace DbaRC.Controllers
         , MBFree bigint
         )
         
+        declare @platform varchar(10) = 'Windows'
+        if  @@VERSION like '%Linux%' set @platform = 'Linux' 
         
         declare @filegroups table
         (filegroupname nvarchar(255)
@@ -52,10 +54,11 @@ namespace DbaRC.Controllers
         , AvailableMB bigint
         , AvailableGB int)
         
-        --Свободное место на дисках
+        --Free Space on Disks
         insert into @drives
         execute xp_fixeddrives
-        
+        if @platform='Linux' update @drives set drive = '/'
+
         ---------------------------- Report by filegroups ------------------------------------------ -
         
         insert into @filegroups
@@ -92,7 +95,6 @@ namespace DbaRC.Controllers
         FROM @filegroups f join @drives d on f.drive = d.drive
         
         
-        --Отчет по группам
         insert into @FilegroupsReport
         SELECT
         DB
