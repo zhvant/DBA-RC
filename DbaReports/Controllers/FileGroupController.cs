@@ -82,8 +82,8 @@ namespace DbaRC.Controllers
         
         
         insert into @FilesReport
-        SELECT DB_NAME() as DB,FileGroupName,  
-        f.Drive,  
+        SELECT DB_NAME() as DB,filegroupname,  
+        f.drive,  
         physical_name as FileName,  
         size * 8 / 1024 as SizeMB,   
         max_size * 8 / 1024 as MaxSizeMB,  
