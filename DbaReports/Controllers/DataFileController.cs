@@ -234,16 +234,31 @@ namespace DbaRC.Controllers
         end as AvailableMB
         FROM @filegroups f join @drives d on f.drive = d.drive
         
+		update @FilesReport set AvailableMB=MaxSizeMB-SizeMB
+		where AvailableMB>MaxSizeMB
+		and FileGroupName='TRANSACTION_LOG'
         
         insert into @FilegroupsReport
+		SELECT DB
+        ,FileGroupName
+		,sum(AvailableMB)
+		,sum(AvailableGB)
+		FROM (
         SELECT
         DB
-        , FileGroupName
-        ,sum(AvailableMB) AvailableMB
-        ,sum(AvailableMB) / 1024 AvailableGB
-          FROM @FilesReport
-          group by DB, FileGroupName
-        
+        ,FileGroupName
+        ,case  
+        when sum(AvailableMB)> MBFree then MBFree 
+		else sum(AvailableMB)
+		end AvailableMB
+        ,case  
+        when sum(AvailableMB)> MBFree then MBFree/1024 
+		else sum(AvailableMB)/1024
+		end AvailableGB
+          FROM @FilesReport f join @drives d on f.drive = d.drive
+          group by DB, FileGroupName, f.drive,MBFree
+		  ) t
+        group by DB, FileGroupName
         
         
         select 

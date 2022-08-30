@@ -19,7 +19,7 @@ namespace DbaRC.Controllers
     {
         public string Text = @"
         SET NOCOUNT ON  
-               
+        
         declare @drives table
         (drive char(1)
         , MBFree bigint
@@ -27,7 +27,7 @@ namespace DbaRC.Controllers
         
         declare @platform varchar(10) = 'Windows'
         if  @@VERSION like '%Linux%' set @platform = 'Linux' 
-        
+
         declare @filegroups table
         (filegroupname nvarchar(255)
         , size bigint
@@ -54,12 +54,12 @@ namespace DbaRC.Controllers
         , AvailableMB bigint
         , AvailableGB int)
         
-        --Free Space on Disks
+        --Free space on disks
         insert into @drives
         execute xp_fixeddrives
         if @platform='Linux' update @drives set drive = '/'
 
-        ---------------------------- Report by filegroups ------------------------------------------ -
+        ---------------------------- Report by file groups ------------------------------------------ -
         
         insert into @filegroups
         SELECT
@@ -94,18 +94,34 @@ namespace DbaRC.Controllers
         end as AvailableMB
         FROM @filegroups f join @drives d on f.drive = d.drive
         
+		update @FilesReport set AvailableMB=MaxSizeMB-SizeMB
+		where AvailableMB>MaxSizeMB
+		and FileGroupName='TRANSACTION_LOG'
         
         insert into @FilegroupsReport
+		SELECT DB
+        ,FileGroupName
+		,sum(AvailableMB)
+		,sum(AvailableGB)
+		FROM (
         SELECT
         DB
-        , FileGroupName
-        ,sum(AvailableMB) AvailableMB
-        ,sum(AvailableMB) / 1024 AvailableGB
-          FROM @FilesReport
-          group by DB, FileGroupName
-        
-             
-        select FileGroupName, AvailableMB as AvailableSpace from @FilegroupsReport";
+        ,FileGroupName
+        ,case  
+        when sum(AvailableMB)> MBFree then MBFree 
+		else sum(AvailableMB)
+		end AvailableMB
+        ,case  
+        when sum(AvailableMB)> MBFree then MBFree/1024 
+		else sum(AvailableMB)/1024
+		end AvailableGB
+          FROM @FilesReport f join @drives d on f.drive = d.drive
+          group by DB, FileGroupName, f.drive,MBFree
+		  ) t
+        group by DB, FileGroupName
+                
+
+		select FileGroupName, AvailableMB as AvailableSpace from @FilegroupsReport";
     }
 
 
