@@ -5,3 +5,4 @@
   It is built using cross platform modern framework .Net 6 running queries to native system objects of databases. App can be deployed on any cloud platform or on-premises server.   
   With DBA-RC, managing your DBMS servers from mobile phone has never been easier.
  
+![DBA-RC](https://github.com/zhvant/DBA-RC/assets/53262841/9113f719-73a0-4ad2-8e90-0d5101e582fa)
